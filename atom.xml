@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://cclog.net</id>
     <title>超哥&apos;s Log</title>
-    <updated>2019-10-18T04:46:12.565Z</updated>
+    <updated>2019-10-18T04:53:56.955Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://cclog.net"/>
     <link rel="self" href="https://cclog.net/atom.xml"/>
@@ -15,7 +15,7 @@
         <id>https://cclog.net/post/hello-blog</id>
         <link href="https://cclog.net/post/hello-blog">
         </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
+        <updated>2019-10-18T04:53:49.000Z</updated>
         <content type="html"><![CDATA[<p>现如今，开个公众号，知乎专栏已经是常规操作，抖音，vlog 也不足为奇，大家渐渐的习惯了快餐文化，习惯了推送过来的信息，习惯了不用动脑的下饭视频。</p>
 <p>13年以后，我就没有再写过博客了，早年的 wordpress 做了一次全站备份后也删除了服务器。最近几年，渐渐的，不再使用微博，也不再天天刷朋友圈。现在，是时候让自己静下来，用最简单的文字，记录自己的思考，分享一些创业的感悟，还有那些在这过程中遇到的人和事。</p>
 <p>未来，也不排除会同步内容到微信、知乎专栏，但是在这里会努力一直更新下去。</p>
