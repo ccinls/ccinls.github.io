@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>我是如何使用 Syncthing 提升工作效率的 | 超哥的LOG</title>
 <meta name="description" content="始于颜值，陷于才华，终于人品" />
-<link rel="shortcut icon" href="https://cclog.net/favicon.ico?v=1571758545033">
+<link rel="shortcut icon" href="https://cclog.net/favicon.ico?v=1571758963175">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://cclog.net/styles/main.css">
@@ -29,7 +29,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://cclog.net">
-  <img class="avatar" src="https://cclog.net/images/avatar.png?v=1571758545033" alt="">
+  <img class="avatar" src="https://cclog.net/images/avatar.png?v=1571758963175" alt="">
   </a>
   <h1 class="site-title">
     超哥的LOG
@@ -89,7 +89,7 @@
                 2019-10-22
               </span>
               <span>
-                4 min read
+                5 min read
               </span>
               
             </div>
@@ -97,12 +97,13 @@
             <div class="post-content-wrapper">
               <div class="post-content">
                 <p><img src="https://cclog.net/post-images/1571758299060.jpg" alt=""><br>
-Syncthing 是一个安全的去中心化的文件共享工具，类似 BitTorrent Sync，不过这款产品是开源的，完全免费。具体工作原理有点类似早期的 bt 下载，需要一个发现服务器，从而让你的设备们相互建立连接。好在发现服务器在程序安装好以后就会默认配置官方的发现服务器，通常使用就已经足够了，当然你也可以自己搭建一个私有的发现服务器。</p>
+Syncthing 是一个安全的去中心化的文件共享工具，类似 BitTorrent Sync，不过这款产品是开源的，完全免费。具体工作原理有点类似早期的 BT 下载，需要一个发现服务器，从而让你的设备们相互建立连接。好在发现服务器在程序安装好以后就会默认配置官方的发现服务器，通常使用就已经足够了，当然你也可以自己搭建一个私有的发现服务器。</p>
 <p>网上很多人说 Syncthing 是一个私人网盘，其实我不太认同。这款软件本身不会存储你任何文件，也不会上传文件到任何第三方的服务器。它做的只是帮助你把文件同步到不同设备上而已。当然，同步过程中，至少要有两台设备都是开机状态。Syncthing 使用 TLS 加密，避免中间人窃取数据。</p>
+<p>此外 Syncthing 同步速度特别快，特别是在局域网中，这体验是iCloud、Dropbox等各种网盘不能比的。同时如果有多台设备同时参与同步，文件共享的速度甚至会比点对点直接发文件更快，有点类似 BT 下载。</p>
 <p>Syncthing 支持Mac，Windows，Linux等平台。具体安装使用说明可以参考 <a href="https://syncthing.net">Syncthing官网</a>，这里就不过多赘述。</p>
 <p>开始之前先说说我设备的情况，我有两台 Macbook，家里有的一台 Windows 台式机，和一台常年开机的Linux工控主机。通常，我会在公司放一台 MacBook，在家会用 Windows 台式机，偶尔会用另外一台 MacBook。</p>
 <p><strong>同步桌面以及重要的工作文件：</strong> 通常如果都是 Mac，可以开 iCloud 同步多台 Mac 之间的同步文件。但是对于跨平台就无能为力了。所以这时候可以有 Syncthing 出场了。我关掉了所有 iCloud 的文件同步，首先用 Syncthing 同步了三台电脑的桌面以及一个用来存放各种工作文件的文件夹。因为我有个习惯，当前的工作文件会放在桌面上。这样一来，三台电脑桌面就可以保持完全同步，下班回家也不用带电脑回去，未完成的工作，到家了可以继续。这里有一个很重要的点，就是那台Linux工控主机，它也参与了文件共享，充当了一个文件中转的作用，这样即使家里其他电脑没有开机，也不用担心文件无法同步。</p>
-<p><strong>同步常用软件的配置：</strong> 比如 VIM、ZSH、TMUX、Clash，甚至现在写博客用的 Gridea 等等，这些工具在使用过程中，当遇到问题的时候会顺手修改一些配置，如果多台设备需要挨个修改配置也是非常麻烦，甚至修改多了以后，不同电脑的软件配置会完全不一样。当有了 Syncthing 以后，一切都变得那么自然，所有电脑都步调一致。当然，如果都是 Mac，你可以同步整个个人文件夹，这样会来的更加简单粗暴。</p>
+<p><strong>同步常用软件的配置：</strong> 比如 VIM、ZSH、TMUX、Clash，甚至现在写博客用的 Gridea 工作文件夹等等，这些工具在使用过程中，当遇到问题的时候，顺手修改配置，如果多台设备需要挨个修改配置也是非常麻烦，甚至修改多了以后，不同电脑的软件配置会完全不一样。当有了 Syncthing 以后，一切都变得那么自然，所有电脑都步调一致。当然，如果都是 Mac，你可以同步整个个人文件夹，这样会来的更加简单粗暴。</p>
 <p><strong>与好基友共享一些你懂的资源：</strong> 这个不能提升工作效率！</p>
 <p>下面说说 Syncthing 在使用过程中的小技巧。</p>
 <p><strong>文件忽略：</strong> Syncthing 提供了一个 <code>.stignore</code> 功能，类似于 <code>.gitignore</code>， 但是这个 <code>.stignore</code> 有一个问题，Syncthing 本身并不会同步这个文件，导致多台设备的文件忽略都要单独配置，更蛋疼的地方在于，一旦修改了这个配置，又要重复以上的工作。针对这个问题，可以建一个 <code>.stglobalignore</code> 文件，把具体的忽略信息写到 <code>.stglobalignore</code> 里面，然后如下图所示的配置即可。<br>
