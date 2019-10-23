@@ -906,6 +906,7 @@ td {
 }
 #vcomments .veditor {
   min-height: 0;
+  resize: none;
 }
 #vcomments .vinput:focus {
   border-bottom-color: #222;
