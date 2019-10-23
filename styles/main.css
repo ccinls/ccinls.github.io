@@ -315,7 +315,7 @@ a {
   transition: all 0.3s;
 }
 a:hover {
-  color: #006CFF;
+  color: #1abc9c;
 }
 body,
 div,
@@ -453,7 +453,7 @@ td {
   font-weight: bolder;
 }
 .post-container .post .post-abstract a {
-  color: #006CFF;
+  color: #1abc9c;
   transition: all 0.3s;
 }
 .post-container .post .post-abstract a:hover {
@@ -810,7 +810,7 @@ td {
   background: #fafafa;
 }
 .toc-container li a.current {
-  color: #006CFF;
+  color: #1abc9c;
   background: #fafafa;
 }
 @media (max-width: 600px) {
@@ -911,6 +911,9 @@ td {
 }
 #vcomments .vat {
   display: none;
+}
+#vcomments .vnick:hover {
+  color: #1abc9c;
 }
 #vcomments .vinfo {
   padding: 5px 0px;
