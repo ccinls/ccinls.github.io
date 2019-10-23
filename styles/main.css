@@ -894,7 +894,7 @@ td {
 }
 @media (max-width: 600px) {
   #vcomments {
-    padding: 0 16px;
+    padding: 0 6px;
   }
 }
 #vcomments .info {
