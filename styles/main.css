@@ -893,7 +893,7 @@ td {
   color: #868e96;
 }
 #vcomments {
-  margin: 0 30px;
+  padding: 0 32px;
 }
 #vcomments .info {
   display: none;
