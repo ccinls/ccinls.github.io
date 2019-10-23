@@ -895,6 +895,11 @@ td {
 #vcomments {
   padding: 0 32px;
 }
+@media (max-width: 600px) {
+  #vcomments {
+    padding: 0 16px;
+  }
+}
 #vcomments .info {
   display: none;
 }
