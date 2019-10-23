@@ -931,6 +931,12 @@ td {
 #vcomments .vwrap .vheader .vinput:focus {
   border-bottom-color: #222 !important;
 }
+#vcomments .vlist .vcard .vquote {
+  margin-top: 0.5em;
+}
+#vcomments .vlist .vcard .vh {
+  margin-top: 1em;
+}
 .hljs {
   display: block;
   overflow-x: auto;
