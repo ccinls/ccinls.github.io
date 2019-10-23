@@ -988,3 +988,8 @@ td {
         display: none;
       }
     
+      .post-detail .post .post-content p {
+    line-height: 2em;
+    letter-spacing: 0.4px;
+}
+    
