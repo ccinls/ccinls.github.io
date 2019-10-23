@@ -568,10 +568,10 @@ td {
   margin: 24px auto;
 }
 .post-detail .post .post-content p {
-  line-height: 1.62;
+  line-height: 2;
   margin-bottom: 1.12em;
   font-size: 16px;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.4px;
   hyphens: auto;
 }
 .post-detail .post .post-content p code,
@@ -815,7 +815,7 @@ td {
 }
 @media (max-width: 600px) {
   .post-detail .post {
-    padding: 16px;
+    padding: 6px;
   }
   .post-detail .post .post-title {
     font-size: 24px;
@@ -826,9 +826,6 @@ td {
   .toc-container {
     display: none;
   }
-}
-#vcomments .info {
-  display: none;
 }
 .archives-container {
   padding: 32px;
@@ -1024,9 +1021,6 @@ td {
         display: none;
       }
     
-      .post-detail .post .post-content p {
-    line-height: 2em;
-    letter-spacing: 0.4px;
-}
+      
 
     
