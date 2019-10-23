@@ -928,7 +928,7 @@ td {
 #vcomments .vwrap .vheader .vinput {
   border-bottom: 0.5px solid #f0f0f0;
 }
-#vcomments .vinput:focus {
+#vcomments .vwrap .vheader .vinput:focus {
   border-bottom-color: #222;
 }
 .hljs {
