@@ -827,6 +827,9 @@ td {
     display: none;
   }
 }
+#vcomments .info {
+  display: none;
+}
 .archives-container {
   padding: 32px;
   flex: 1;
