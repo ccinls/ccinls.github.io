@@ -892,6 +892,21 @@ td {
   padding: 40px 24px;
   color: #868e96;
 }
+#vcomments {
+  margin: 0 30px;
+}
+#vcomments .info {
+  display: none;
+}
+#vcomments .vctrl {
+  display: none;
+}
+#vcomments .markdown {
+  display: none;
+}
+#vcomments .veditor {
+  min-height: 0;
+}
 .hljs {
   display: block;
   overflow-x: auto;
