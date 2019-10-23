@@ -907,6 +907,9 @@ td {
 #vcomments .veditor {
   min-height: 0;
 }
+#vcomments .vinput:focus {
+  border-bottom-color: #222;
+}
 .hljs {
   display: block;
   overflow-x: auto;
