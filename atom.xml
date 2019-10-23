@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://cclog.net</id>
     <title>超哥的LOG</title>
-    <updated>2019-10-23T15:27:23.386Z</updated>
+    <updated>2019-10-23T15:27:56.624Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://cclog.net"/>
     <link rel="self" href="https://cclog.net/atom.xml"/>
@@ -95,12 +95,20 @@ Default.rdp
         <link href="https://cclog.net/post/about">
         </link>
         <updated>2019-10-18T06:42:17.000Z</updated>
+        <summary type="html"><![CDATA[<h2 id="不爱铲屎的铲屎官">不爱铲屎的铲屎官</h2>
+<p>目前和一只加菲生活在一起</p>
+<h2 id="硬件创业者">硬件创业者</h2>
+<p>致力于解决人和宠物的和谐生活。<br>
+用过无数款猫厕所，从「脸盆」到「CatGenie」，始终没有找到令人满意的产品。<br>
+所以，我们会从猫厕所开始，从此铲屎官翻身做主人。</p>
+]]></summary>
         <content type="html"><![CDATA[<h2 id="不爱铲屎的铲屎官">不爱铲屎的铲屎官</h2>
 <p>目前和一只加菲生活在一起</p>
 <h2 id="硬件创业者">硬件创业者</h2>
 <p>致力于解决人和宠物的和谐生活。<br>
 用过无数款猫厕所，从「脸盆」到「CatGenie」，始终没有找到令人满意的产品。<br>
 所以，我们会从猫厕所开始，从此铲屎官翻身做主人。</p>
+<!-- more -->
 <h2 id="智能硬件爱好者">智能硬件爱好者</h2>
 <p>智能家居数量：1.2个/每平米<br>
 软路由/NAS/树莓派<br>
