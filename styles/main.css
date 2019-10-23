@@ -912,6 +912,9 @@ td {
 #vcomments .vat {
   display: none;
 }
+#vcomments .vinfo {
+  padding: 5px 0px;
+}
 #vcomments .markdown {
   display: none;
 }
