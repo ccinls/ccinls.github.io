@@ -906,6 +906,15 @@ td {
 #vcomments .vctrl {
   display: none;
 }
+#vcomments .vsys {
+  display: none;
+}
+#vcomments .vtime {
+  display: none;
+}
+#vcomments .vat {
+  display: none;
+}
 #vcomments .markdown {
   display: none;
 }
