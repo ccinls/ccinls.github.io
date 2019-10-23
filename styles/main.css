@@ -935,7 +935,10 @@ td {
   margin-top: 0.5em;
 }
 #vcomments .vlist .vcard .vh {
-  margin-top: 1em;
+  margin-top: 0em;
+}
+#vcomments .vlist .vcard {
+  padding-top: 0.5em;
 }
 .hljs {
   display: block;
