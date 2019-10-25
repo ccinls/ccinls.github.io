@@ -906,8 +906,11 @@ td {
 #vcomments .vsys {
   display: none;
 }
+#vcomments .vtime {
+  display: none;
+}
 #vcomments .vat {
-  color: #b3b3b3;
+  display: none;
 }
 #vcomments .vnick:hover {
   color: #1abc9c;
