@@ -936,6 +936,7 @@ td {
 }
 #vcomments .vlist .vcard .vh {
   margin-top: 0em;
+  border-bottom: none;
 }
 #vcomments .vlist .vcard {
   padding-top: 0.5em;
