@@ -1040,3 +1040,7 @@ td {
         display: none;
       }
     
+      a:hover {
+        color: #1abc9c;
+      }
+    
