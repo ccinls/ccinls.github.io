@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>软路由 OpenWrt + SmartDNS + PassWall + Haproxy 配置以及优化 | 超哥的LOG</title>
 <meta name="description" content="我看到了我的爱恋 我飞到她的身边 我捧出给她的礼物 那是一小块凝固的时间" />
-<link rel="shortcut icon" href="https://cclog.net/favicon.ico?v=1582661517056">
+<link rel="shortcut icon" href="https://cclog.net/favicon.ico?v=1582662035177">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://cclog.net/styles/main.css">
@@ -29,7 +29,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://cclog.net">
-  <img class="avatar" src="https://cclog.net/images/avatar.png?v=1582661517056" alt="">
+  <img class="avatar" src="https://cclog.net/images/avatar.png?v=1582662035177" alt="">
   </a>
   <h1 class="site-title">
     超哥的LOG
@@ -91,17 +91,17 @@
 <h1 id="1smartdns">1.SmartDNS</h1>
 <p>开始之前，我先谈谈 SmartDNS，大家对它最为认可的地方在于，可以 <strong>返回测速（基于 PING 的 TTL 或 TCP连接时间 ) 结果最快的 IP</strong>，在某种程度上，提高用户的使用体验，特别是对于移动，联通以及一些不知名的宽带运营商，有不错的效果。</p>
 <p>在 OpenWrt 里面开启 SmartDNS非常简单，我就用一张截图解决问题，由于 SmartDNS 能返回速度最快的 IP，所以下面上游 DNS 可以随便填写，甚至越多越好。为了让篇幅不要太长，我只截了其中一部分DNS。<br>
-<img src="https://cclog.net/post-images/1582654904220.jpg" alt="" loading="lazy"><br>
+<img src="https://cclog.net/post-images/1582661807397.jpg" alt="" loading="lazy"><br>
 这样就完了么，目前我看到所有的 youtuber 教学视频到这里就结束了。<br>
 有一次我无聊看了一下系统生成的配置文件，我笑了。如果只是这样配置，根本没有用上 SmarDNS 的核心功能——测速并返回速度最快的IP。查看方法非常简单，见下图。<br>
-<img src="https://cclog.net/post-images/1582655428546.png" alt="" loading="lazy"><br>
+<img src="https://cclog.net/post-images/1582661820952.png" alt="" loading="lazy"><br>
 SmartDNS配置有一个选项 <code>speed-check-mode</code>，默认值是 <code>无</code>，具体可以在 <a href="https://github.com/pymumu/smartdns">SmartDNS</a> 的 Github 上查看官方文档。如果不设置，那么就不会启用测速模式，也就和大多数DNS工具没差别了。当然，也就没有很多 Youtuber 鼓吹的功能。<br>
 具体解决方法非常简单，去到自定义设置里面，加上 <code>speed-check-mode tcp:443,tcp:80,ping</code> 这行就可以。具体测速逻辑，可以根据个人情况做调整。</p>
 <h1 id="2-passwall">2. PassWall</h1>
 <p>这部分就比较简单了，首先添加节点 （ VPN -&gt; 正确上网姿势 √ -&gt; 节点列表 -&gt; 添加），具体根据各种的机场情况以及要求的配置手动添加或者通过链接订阅。这个地方也能参考一些 Youtuber 的教程，具体我就不说名字了，一搜一大把。<br>
 因为我用的是V2Ray，所以提一个优化的点。对于浏览网页较多的场景，可以开启 Mux 的选项， Mux Concurrency 保持默认就行。开启这个功能有可以降低请求的响应延时，但是对于下载速度没有变化，甚至可能会有反作用，具体 V2Ray 的官方文档有提到。<br>
 添加完节点后就是全局设置了，依旧截一个图解决问题。<strong>国内的DNS，指向SmartDNS的端口。</strong> 细心的朋友会发现，这里TCP节点是 <code>127.0.0.1</code> 指向本地端口，这个具体后面会提到。<br>
-<img src="https://cclog.net/post-images/1582657052040.jpg" alt="" loading="lazy"></p>
+<img src="https://cclog.net/post-images/1582661859640.jpg" alt="" loading="lazy"></p>
 <h1 id="3haproxy">3.Haproxy</h1>
 <p>这部分也是重头戏了，配置得当，对于机场节点不是很稳的朋友会友不错的提升。这部分需要一定的动手能力，好啦，我们开始吧。<br>
 首先我并没有使用路由器内自带的 Haproxy 的功能，具体原因很简单，配置不够灵活。所以，我这里用 Docker 启动 Haproxy 。</p>
@@ -164,16 +164,19 @@ backend mps-out
     option  tcp-check
     option  forwardfor
     balance roundrobin
-    # 一下是服务器节点设置
+    # 以下是服务器节点设置
     server abc1  abc1.com:1234
     server abc2  abc2.com:1443
 </code></pre>
 <p>修改配置文件的最后的服务器节点和端口，这批节点需要是同样的协议，用户名，密码等等。编辑好以后，放在路由器的这个路径上 <code>/opt/haproxy.cfg</code> ，其实文件位置随意，后面生成 Docker 的时候，记得对应修改就行。懒得折腾就使用我这个路径。但注意不要放在 <code>/etc</code> 下面，免得被系统覆盖。<br>
 接下来新建 Docker 容器，具体配置同样一张截图：<br>
-<img src="https://cclog.net/post-images/1582660086520.png" alt="" loading="lazy"><br>
-挂载(-v) 图上看不全，请填入 <code>/opt/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg</code> ，创建过程比较长，提交后耐心等待。<br>
-至此，还差最后一步，整个配置过程就完成了，修改你的节点，把服务器地址指向 <code>127.0.0.1</code> 端口 <code>8001</code> 即可。<br>
-最后，说说为什么要大费周章的通过 Docker 来启动 Haproxy，主要有一下原因，可以灵活定制超时的时间，同时启用了 <code>slowstart</code> 功能，我设置了 3 个小时，开启这个功能的好处在于，经常挂掉的节点，权重会降低，这样参与负载均衡的都是速度快且稳定的节点了。</p>
+<img src="https://cclog.net/post-images/1582661877160.png" alt="" loading="lazy"><br>
+挂载(-v) 图上看不全，请填入</p>
+<pre><code>/opt/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+</code></pre>
+<p>随后创建，由于创建过程比较长，提交后耐心等待。<br>
+至此，还差最后一步，整个配置过程就完成了，修改你的节点，把服务器地址指向 <code>127.0.0.1</code> 端口 <code>8001</code> 即可。</p>
+<p>最后，说说为什么要大费周章的通过 Docker 来启动 Haproxy，主要有一下原因，可以灵活定制超时的时间，同时启用了 <code>slowstart</code> 功能，我设置了 3 个小时，开启这个功能的好处在于，经常挂掉的节点，权重会降低，这样参与负载均衡的都是速度快且稳定的节点了。</p>
 
               </div>
               <div class="toc-container">
