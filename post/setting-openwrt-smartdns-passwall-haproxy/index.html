@@ -1,0 +1,299 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>软路由 OpenWrt + SmartDNS + PassWall + Haproxy 配置以及优化 | 超哥的LOG</title>
+<meta name="description" content="我看到了我的爱恋 我飞到她的身边 我捧出给她的礼物 那是一小块凝固的时间" />
+<link rel="shortcut icon" href="https://cclog.net/favicon.ico?v=1582661517056">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://cclog.net/styles/main.css">
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-150353879-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-150353879-1');
+</script>
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://cclog.net">
+  <img class="avatar" src="https://cclog.net/images/avatar.png?v=1582661517056" alt="">
+  </a>
+  <h1 class="site-title">
+    超哥的LOG
+  </h1>
+  <p class="site-description">
+    我看到了我的爱恋 我飞到她的身边 我捧出给她的礼物 那是一小块凝固的时间
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              软路由 OpenWrt + SmartDNS + PassWall + Haproxy 配置以及优化
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-02-26
+              </span>
+              <span>
+                7 min read
+              </span>
+              
+                <a href="https://cclog.net/tag/2ZjfG3wAW/" class="post-tag">
+                  # 软路由
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://cclog.net/post-images/setting-openwrt-smartdns-passwall-haproxy.jpg" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="0-前言">0. 前言</h1>
+<p>疫情期间，大家都宅在家里，厨艺应该都大涨了吧（手动狗头）。</p>
+<p>这期间，我也花了一点点时间，配置了一个软路由，全屋终于可以无痛科学上网，网速也还不错。后面我会放测速的截图。</p>
+<p>这期间，我也有看一些 Youtuber 分享的教程和一些经验，但对于大多 Youtuber 的内容，我只能说仅仅是恰好跑起来了，并没有真正的去调优，甚至有些地方不求甚解。对我就是说的大家吵了很久的 SmartDNS，我可以负责任的说，就我发这篇 Blog 之前，所有的 Youtube 上教大家配置 SmartDNS 都是有问题的，只能说可以运行，如果只配置了国外的DNS甚至有可能会拖慢整体网速。好了，接下来我们从 SmartDNS 开始。</p>
+<p>对了，我目前使用的是 esir 编译的 OpenWrt，我们没有使用 IPv6，如果你使用别的版本，或者开启的IPv6，可能会有一些不一样，但是整体思路都是一样的。</p>
+<h1 id="1smartdns">1.SmartDNS</h1>
+<p>开始之前，我先谈谈 SmartDNS，大家对它最为认可的地方在于，可以 <strong>返回测速（基于 PING 的 TTL 或 TCP连接时间 ) 结果最快的 IP</strong>，在某种程度上，提高用户的使用体验，特别是对于移动，联通以及一些不知名的宽带运营商，有不错的效果。</p>
+<p>在 OpenWrt 里面开启 SmartDNS非常简单，我就用一张截图解决问题，由于 SmartDNS 能返回速度最快的 IP，所以下面上游 DNS 可以随便填写，甚至越多越好。为了让篇幅不要太长，我只截了其中一部分DNS。<br>
+<img src="https://cclog.net/post-images/1582654904220.jpg" alt="" loading="lazy"><br>
+这样就完了么，目前我看到所有的 youtuber 教学视频到这里就结束了。<br>
+有一次我无聊看了一下系统生成的配置文件，我笑了。如果只是这样配置，根本没有用上 SmarDNS 的核心功能——测速并返回速度最快的IP。查看方法非常简单，见下图。<br>
+<img src="https://cclog.net/post-images/1582655428546.png" alt="" loading="lazy"><br>
+SmartDNS配置有一个选项 <code>speed-check-mode</code>，默认值是 <code>无</code>，具体可以在 <a href="https://github.com/pymumu/smartdns">SmartDNS</a> 的 Github 上查看官方文档。如果不设置，那么就不会启用测速模式，也就和大多数DNS工具没差别了。当然，也就没有很多 Youtuber 鼓吹的功能。<br>
+具体解决方法非常简单，去到自定义设置里面，加上 <code>speed-check-mode tcp:443,tcp:80,ping</code> 这行就可以。具体测速逻辑，可以根据个人情况做调整。</p>
+<h1 id="2-passwall">2. PassWall</h1>
+<p>这部分就比较简单了，首先添加节点 （ VPN -&gt; 正确上网姿势 √ -&gt; 节点列表 -&gt; 添加），具体根据各种的机场情况以及要求的配置手动添加或者通过链接订阅。这个地方也能参考一些 Youtuber 的教程，具体我就不说名字了，一搜一大把。<br>
+因为我用的是V2Ray，所以提一个优化的点。对于浏览网页较多的场景，可以开启 Mux 的选项， Mux Concurrency 保持默认就行。开启这个功能有可以降低请求的响应延时，但是对于下载速度没有变化，甚至可能会有反作用，具体 V2Ray 的官方文档有提到。<br>
+添加完节点后就是全局设置了，依旧截一个图解决问题。<strong>国内的DNS，指向SmartDNS的端口。</strong> 细心的朋友会发现，这里TCP节点是 <code>127.0.0.1</code> 指向本地端口，这个具体后面会提到。<br>
+<img src="https://cclog.net/post-images/1582657052040.jpg" alt="" loading="lazy"></p>
+<h1 id="3haproxy">3.Haproxy</h1>
+<p>这部分也是重头戏了，配置得当，对于机场节点不是很稳的朋友会友不错的提升。这部分需要一定的动手能力，好啦，我们开始吧。<br>
+首先我并没有使用路由器内自带的 Haproxy 的功能，具体原因很简单，配置不够灵活。所以，我这里用 Docker 启动 Haproxy 。</p>
+<p>首先准备一个 Haproxy 的配置文件 haproxy.cfg ，模板如下：</p>
+<pre><code>global
+    ulimit-n 1048576
+    no log
+    # Distribute the health checks with a bit of randomness (value in percent of check interval)
+    spread-checks 20
+    # Limit the spread of checks, or services would take too long coming online (value in milliseconds)
+    max-spread-checks 5000
+    # progress number，CPU 有几个核心就修改成对应的数字
+    nbproc 2
+
+defaults
+    option dontlognull
+    option dontlog-normal
+    option srvtcpka
+    option clitcpka
+    option splice-auto # 启用对于套接字双向地自动内核加速。
+    option splice-request
+    option splice-response
+    maxconn 65535
+    timeout connect 1000ms # 对线路要求高，超过1000ms就认为服务不可用
+    timeout client  300s
+    timeout server  300s
+    timeout check   2s
+    retries 1            # 1次连接失败就认为服务器不可用，主要通过后面的check检查
+    option  redispatch   #当serverid对应的服务器挂掉后，强制定向到其他健康服务器
+    option  abortonclose #当服务器负载很高时，自动结束掉当前队列中处理比较久的链接
+    default-server check inter 3000 rise 8 fall 4 weight 255 slowstart 3h 
+
+resolvers mydns
+    nameserver dns1 127.0.0.1:53
+    nameserver dns2 8.8.8.8:53
+    nameserver dns3 1.1.1.1:53
+    resolve_retries      9999
+    timeout retry        1s
+    hold other           300s
+    hold refused         300s
+    hold nx              300s
+    hold timeout         300s
+    hold valid           100s
+
+listen haproxy_stats
+    bind 0.0.0.0:7070  #侦听IP:Port
+    mode http
+    stats enable
+    stats refresh 1m
+    stats uri /
+    stats realm Haproxy\ Statistics
+    stats admin if TRUE  #手工启用/禁用后端服务器
+
+frontend mps-in
+    bind :8001  # 本地服务端口
+    default_backend mps-out
+
+backend mps-out
+    mode tcp
+    option  tcp-check
+    option  forwardfor
+    balance roundrobin
+    # 一下是服务器节点设置
+    server abc1  abc1.com:1234
+    server abc2  abc2.com:1443
+</code></pre>
+<p>修改配置文件的最后的服务器节点和端口，这批节点需要是同样的协议，用户名，密码等等。编辑好以后，放在路由器的这个路径上 <code>/opt/haproxy.cfg</code> ，其实文件位置随意，后面生成 Docker 的时候，记得对应修改就行。懒得折腾就使用我这个路径。但注意不要放在 <code>/etc</code> 下面，免得被系统覆盖。<br>
+接下来新建 Docker 容器，具体配置同样一张截图：<br>
+<img src="https://cclog.net/post-images/1582660086520.png" alt="" loading="lazy"><br>
+挂载(-v) 图上看不全，请填入 <code>/opt/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg</code> ，创建过程比较长，提交后耐心等待。<br>
+至此，还差最后一步，整个配置过程就完成了，修改你的节点，把服务器地址指向 <code>127.0.0.1</code> 端口 <code>8001</code> 即可。<br>
+最后，说说为什么要大费周章的通过 Docker 来启动 Haproxy，主要有一下原因，可以灵活定制超时的时间，同时启用了 <code>slowstart</code> 功能，我设置了 3 个小时，开启这个功能的好处在于，经常挂掉的节点，权重会降低，这样参与负载均衡的都是速度快且稳定的节点了。</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#0-%E5%89%8D%E8%A8%80">0. 前言</a></li>
+<li><a href="#1smartdns">1.SmartDNS</a></li>
+<li><a href="#2-passwall">2. PassWall</a></li>
+<li><a href="#3haproxy">3.Haproxy</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div id="vcomments"></div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://cclog.net/post/recommend-gridea/">
+              <h3 class="post-title">
+                推荐一个轻量的 Github Pages 静态博客写作客户端 Gridea 
+              </h3>
+            </a>
+          </div>
+        
+
+        
+        <script>
+            new Valine({
+                el: '#vcomments',
+                appId: 'vNyGGiBRRa8VN3sxLOHQ3hTW-MdYXbMMI',
+                appKey: 'ac94g4d4O9ehLks9w3QC9oLQ',
+                recordIP: true,
+                meta:['nick','mail'],
+                placeholder: '写下你的评论吧...' 
+            })
+        </script>
+        
+
+        
+
+        <div class="site-footer">
+  <div class="social-container">
+    
+      
+    
+      
+        <a href="https://twitter.com/iYes2Me" target="_blank">
+          <i class="fab fa-twitter"></i>
+        </a>
+      
+    
+      
+        <a href="https://weibo.com/iyes2me" target="_blank">
+          <i class="fab fa-weibo"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+        <a href="https://www.instagram.com/yes2me" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
+      
+    
+  </div>
+  <a href="https://cclog.net" target="_blank">超哥的LOG</a> © 2019
+<br/>
+Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://cclog.net/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+
+  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+  // This should probably be throttled.
+  // Especially because it triggers during smooth scrolling.
+  // https://lodash.com/docs/4.17.10#throttle
+  // You could do like...
+  // window.addEventListener("scroll", () => {
+  //    _.throttle(doThatStuff, 100);
+  // });
+  // Only not doing it here to keep this Pen dependency-free.
+
+  window.addEventListener("scroll", event => {
+    let fromTop = window.scrollY;
+
+    mainNavLinks.forEach((link, index) => {
+      let section = document.getElementById(decodeURI(link.hash).substring(1));
+      let nextSection = null
+      if (mainNavLinks[index + 1]) {
+        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+      }
+      if (section.offsetTop <= fromTop) {
+        if (nextSection) {
+          if (nextSection.offsetTop > fromTop) {
+            link.classList.add("current");
+          } else {
+            link.classList.remove("current");    
+          }
+        } else {
+          link.classList.add("current");
+        }
+      } else {
+        link.classList.remove("current");
+      }
+    });
+  });
+
+</script>
+
+      </div>
+    </div>
+
+  </body>
+</html>
