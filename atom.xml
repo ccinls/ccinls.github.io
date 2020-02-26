@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://cclog.net</id>
     <title>超哥的LOG</title>
-    <updated>2020-02-25T20:29:57.706Z</updated>
+    <updated>2020-02-26T07:42:58.250Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://cclog.net"/>
     <link rel="self" href="https://cclog.net/atom.xml"/>
@@ -113,6 +113,9 @@ backend mps-out
 <p>随后创建，由于创建过程比较长，提交后耐心等待。<br>
 至此，还差最后一步，整个配置过程就完成了，进入PassWall 并修改你的节点信息，把服务器地址指向 <code>127.0.0.1</code> 端口 <code>8001</code> ，其他配置不变。</p>
 <p>最后，说说为什么要大费周章的通过 Docker 来启动 Haproxy，主要有一下原因，可以灵活定制超时的时间，同时启用了 <code>slowstart</code> 功能，我设置了 3 个小时，开启这个功能的好处在于，经常挂掉的节点，权重会降低，这样参与负载均衡的都是速度快且稳定的节点了。</p>
+<h1 id="4-测速">4. 测速</h1>
+<p>这个过墙的速度，我已经很满意了<br>
+<img src="https://cclog.net/post-images/1582702950209.jpg" alt="" loading="lazy"></p>
 ]]></content>
     </entry>
     <entry>
