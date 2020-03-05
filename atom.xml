@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://cclog.net</id>
     <title>超哥的LOG</title>
-    <updated>2020-02-26T07:42:58.250Z</updated>
+    <updated>2020-03-05T19:45:42.848Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://cclog.net"/>
     <link rel="self" href="https://cclog.net/atom.xml"/>
@@ -115,6 +115,7 @@ backend mps-out
 <p>最后，说说为什么要大费周章的通过 Docker 来启动 Haproxy，主要有一下原因，可以灵活定制超时的时间，同时启用了 <code>slowstart</code> 功能，我设置了 3 个小时，开启这个功能的好处在于，经常挂掉的节点，权重会降低，这样参与负载均衡的都是速度快且稳定的节点了。</p>
 <h1 id="4-测速">4. 测速</h1>
 <p>这个过墙的速度，我已经很满意了<br>
+<img src="https://cclog.net/post-images/1583437534025.png" alt="" loading="lazy"><br>
 <img src="https://cclog.net/post-images/1582702950209.jpg" alt="" loading="lazy"></p>
 ]]></content>
     </entry>
