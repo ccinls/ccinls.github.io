@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>软路由 OpenWrt + SmartDNS + PassWall + Haproxy 配置以及优化 | 超哥的LOG</title>
 <meta name="description" content="我看到了我的爱恋 我飞到她的身边 我捧出给她的礼物 那是一小块凝固的时间" />
-<link rel="shortcut icon" href="https://cclog.net/favicon.ico?v=1585221853264">
+<link rel="shortcut icon" href="https://cclog.net/favicon.ico?v=1586791157038">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://cclog.net/styles/main.css">
@@ -29,7 +29,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://cclog.net">
-  <img class="avatar" src="https://cclog.net/images/avatar.png?v=1585221853264" alt="">
+  <img class="avatar" src="https://cclog.net/images/avatar.png?v=1586791157038" alt="">
   </a>
   <h1 class="site-title">
     超哥的LOG
@@ -97,7 +97,7 @@
 <img src="https://cclog.net/post-images/1582661820952.png" alt="" loading="lazy"><br>
 SmartDNS配置有一个选项 <code>speed-check-mode</code>，默认值是 <code>无</code>，具体可以在 <a href="https://github.com/pymumu/smartdns">SmartDNS</a> 的 Github 上查看官方文档。如果不设置，那么就不会启用测速模式，也就和大多数DNS工具没差别了。当然，也就没有很多 Youtuber 鼓吹的功能。<br>
 具体解决方法非常简单，去到自定义设置里面，加上这行就可以。</p>
-<pre><code>speed-check-mode tcp:443,tcp:80,ping
+<pre><code>speed-check-mode tcp:443,ping
 </code></pre>
 <p>具体测速逻辑，可以根据个人情况做调整。</p>
 <h1 id="2-passwall">2. PassWall</h1>
