@@ -349,6 +349,9 @@ td {
   flex-direction: column;
   padding: 0 24px;
 }
+:root {
+  --waline-bgcolor-light: #FFFFFF !important;
+}
 .site-header {
   padding: 48px 0;
   text-align: center;
@@ -887,9 +890,6 @@ td {
   padding: 40px 24px;
   color: #868e96;
 }
-:root {
-  --waline-bgcolor-light: #FFFFFF;
-}
 .hljs {
   display: block;
   overflow-x: auto;
@@ -992,8 +992,4 @@ td {
       a:hover {
         color: #1abc9c;
       }
-    
-      :root {
-  --waline-bgcolor-light: #FFFFFF;
-}
     
