@@ -11,7 +11,7 @@
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
-<script src='//cdn.jsdelivr.net/npm/@waline/client'></script>
+<script src='//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js'></script>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-150353879-1"></script>
 <script>
@@ -186,7 +186,8 @@ Default.rdp
                 el: '#vcomments',
                 serverURL: 'https://cc-comments.vercel.app',
                 recordIP: true,
-                meta:['nick','mail'],
+                visitor: true,
+                login: 'force',
                 placeholder: '写下你的评论吧...' 
             })
         </script>
