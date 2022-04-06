@@ -1042,3 +1042,7 @@ td {
         color: #1abc9c;
       }
     
+      :root {
+  --waline-bgcolor-light: #FFFFFF;
+}
+    
