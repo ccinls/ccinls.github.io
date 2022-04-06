@@ -887,57 +887,8 @@ td {
   padding: 40px 24px;
   color: #868e96;
 }
-#vcomments {
-  padding: 0 32px;
-}
-@media (max-width: 600px) {
-  #vcomments {
-    padding: 0 6px;
-  }
-  #vcomments .vlist .vcard .vimg {
-    display: none;
-  }
-}
-#vcomments .info {
-  display: none;
-}
-#vcomments .vctrl {
-  display: none;
-}
-#vcomments .vsys {
-  display: none;
-}
-#vcomments .vat {
-  color: #b3b1b1;
-}
-#vcomments .vnick:hover {
-  color: #1abc9c;
-}
-#vcomments .vinfo {
-  padding: 5px 0px;
-}
-#vcomments .markdown {
-  display: none;
-}
-#vcomments .veditor {
-  min-height: 0;
-  resize: none;
-}
-#vcomments .vwrap .vheader .vinput {
-  border-bottom: 0.5px solid #f0f0f0;
-}
-#vcomments .vwrap .vheader .vinput:focus {
-  border-bottom-color: #222 !important;
-}
-#vcomments .vlist .vcard .vquote {
-  margin-top: 0.5em;
-}
-#vcomments .vlist .vcard .vh {
-  margin-top: 0em;
-  border-bottom: none;
-}
-#vcomments .vlist .vcard {
-  padding-top: 0.5em;
+:root {
+  --waline-bgcolor-light: #FFFFFF;
 }
 .hljs {
   display: block;
