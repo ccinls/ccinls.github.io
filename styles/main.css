@@ -349,9 +349,6 @@ td {
   flex-direction: column;
   padding: 0 24px;
 }
-:root {
-  --waline-bgcolor-light: #FFFFFF !important;
-}
 .site-header {
   padding: 48px 0;
   text-align: center;
@@ -992,4 +989,8 @@ td {
       a:hover {
         color: #1abc9c;
       }
+    
+      :root {
+    --waline-bgcolor-light: #FFFFFF !important; 
+}
     
